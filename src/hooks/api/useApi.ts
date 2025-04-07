@@ -1,5 +1,5 @@
 import useSWR, { SWRConfiguration, SWRResponse } from 'swr'
-import { fetcher } from '@/network/fetcher'
+import { fetcher } from '@/lib/fetcher'
 import type { FetcherOptions, ApiError } from '@/types/api'
 
 type UseApiResponse<T> = SWRResponse<T, ApiError> & {

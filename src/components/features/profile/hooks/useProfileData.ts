@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { ProfileData } from '@/types/profile/components'
-import { fetchProfileData } from '@/network/profile'
+import { fetchProfileData } from '@/network/profile/profile'
 
 export function useProfileData() {
   const [profile, setProfile] = useState<ProfileData | null>(null)
