@@ -1,41 +1,41 @@
-import { useState, useEffect } from 'react';
-import type { ProfileData } from '@/types/profile/components';
-import { fetchProfileData } from '@/lib/profile';
+import { useState, useEffect } from 'react'
+import type { ProfileData } from '@/types/profile/components'
+import { fetchProfileData } from '@/network/profile'
 
 export function useProfileData() {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [profile, setProfile] = useState<ProfileData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
     async function loadProfile() {
       try {
-        setLoading(true);
-        const data = await fetchProfileData();
-        setProfile(data);
-        setError(null);
+        setLoading(true)
+        const data = await fetchProfileData()
+        setProfile(data)
+        setError(null)
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('Unknown error'));
+        setError(err instanceof Error ? err : new Error('Unknown error'))
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
 
-    loadProfile();
-  }, []);
+    loadProfile()
+  }, [])
 
   const refreshProfile = async () => {
     try {
-      setLoading(true);
-      const data = await fetchProfileData();
-      setProfile(data);
-      setError(null);
+      setLoading(true)
+      const data = await fetchProfileData()
+      setProfile(data)
+      setError(null)
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('Unknown error'));
+      setError(err instanceof Error ? err : new Error('Unknown error'))
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
-  return { profile, loading, error, refreshProfile };
+  return { profile, loading, error, refreshProfile }
 }

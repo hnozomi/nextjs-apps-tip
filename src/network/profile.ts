@@ -1,6 +1,10 @@
-import type { ProfileData } from '@/types/profile/components';
+import { fetcher } from './fetcher'
+import type { ProfileData } from '@/types/profile'
 
-export function getProfileData(): ProfileData {
+const API_BASE_URL = '/api'
+
+// モックデータを提供する関数
+export const getProfileData = (): ProfileData => {
   return {
     name: '山田 太郎',
     title: 'フロントエンドエンジニア',
@@ -32,13 +36,33 @@ export function getProfileData(): ProfileData {
         period: '2014年 - 2018年',
       },
     ],
-  };
+  }
 }
 
-export async function fetchProfileData(): Promise<ProfileData> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(getProfileData());
-    }, 500);
-  });
+// API経由でプロファイルデータを取得する関数
+export const fetchProfileData = async (): Promise<ProfileData> => {
+  return fetcher<ProfileData>(`${API_BASE_URL}/profile`)
+}
+
+// プロファイルデータを更新する関数
+export const updateProfileData = async (data: Partial<ProfileData>): Promise<ProfileData> => {
+  return fetcher<ProfileData>(`${API_BASE_URL}/profile`, {
+    method: 'PUT',
+    body: data
+  })
+}
+
+// スキルを追加する関数
+export const addProfileSkill = async (skill: string): Promise<ProfileData> => {
+  return fetcher<ProfileData>(`${API_BASE_URL}/profile/skills`, {
+    method: 'POST',
+    body: { skill }
+  })
+}
+
+// スキルを削除する関数
+export const removeProfileSkill = async (skill: string): Promise<ProfileData> => {
+  return fetcher<ProfileData>(`${API_BASE_URL}/profile/skills/${encodeURIComponent(skill)}`, {
+    method: 'DELETE'
+  })
 }
