@@ -19,8 +19,9 @@
 │   ├── app/                 # App Router (Next.js 13+)
 │   ├── components/          # コンポーネント
 │   │   ├── features/        # 機能別コンポーネント
-│   │   ├── layout/          # レイアウト関連
 │   │   └── ui/              # 基本的なUI要素
+│   │       ├── layout/      # レイアウト関連
+│   │       └── [その他UIコンポーネント]
 │   ├── config/              # 設定ファイル
 │   ├── hooks/               # カスタムフック
 │   │   ├── api/             # API関連のフック
@@ -129,12 +130,12 @@ src/components/
 │       │   ├── [フックB].ts
 │       │   └── index.ts      # エクスポート用
 │       └── index.ts          # エクスポート用
-├── layout/                   # レイアウト関連
-│   ├── Header.tsx
-│   ├── Footer.tsx
-│   ├── Layout.tsx
-│   └── index.ts              # エクスポート用
 └── ui/                       # 基本的なUI要素
+    ├── layout/               # レイアウト関連
+    │   ├── Header.tsx
+    │   ├── Footer.tsx
+    │   ├── Layout.tsx
+    │   └── index.ts          # エクスポート用
     ├── [UIコンポーネントA].tsx
     ├── [UIコンポーネントB].tsx
     └── index.ts              # エクスポート用
@@ -183,7 +184,7 @@ src/
 ## 使用例
 
 ```tsx
-import { Layout } from '@/components/layout';
+import { Layout } from '@/components/ui/layout';
 import { ページコンポーネント } from '@/components/features/[ドメイン]/components';
 import { getドメインData } from '@/network/[ドメイン]';
 
